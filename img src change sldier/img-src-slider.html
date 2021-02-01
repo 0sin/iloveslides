@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {background-color: black}
+    .container {
+      margin: 50px auto;
+      background-color: blue;
+      width: 500px;
+      height: 750px;
+    }
+    img {
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img name="slider" alt="">
+  </div>
+  
+
+  <script>
+    let i = 0 //Start point
+    let images = [];
+    let TIME = 3000;
+
+    images[0] = 'coffee1.jpg';
+    images[1] = 'coffee2.jpg';
+    images[2] = 'coffee3.jpg';
+
+    function changeImg() {
+      document.slider.src = images[i];
+
+      if(i < images.length - 1) {
+        i++
+      }else{
+        i = 0;
+      }
+
+      // setTimeout("changeImg()", TIME);
+      setTimeout(changeImg, TIME);
+    }
+
+    window.onload = changeImg;
+
+  </script>
+</body>
+</html>
