@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel-slider2</title>
+  <style>
+    body {
+      background: #eee;
+    }
+    .container {
+      width: 50%;
+      margin: 50px auto;
+    }
+    .carousel {
+      border: 2px solid #416be4;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 5px;
+      background: #fff;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .slider {
+      display: flex;
+      width: 400%;
+      height: 100%;
+      background: #ff2;
+      transition: all .4s;
+    }
+    .slider section {
+      /* width: 100%; */
+      flex-basis: 100%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      font-size: 20px;
+    }
+    .left, .right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    .arrow i {
+      font-size: 70px;
+      -webkit-user-select: none;
+      color: #416be4;
+    }
+    .left {
+      left: 10px;
+    }
+    .right {
+      right: 10px;
+    }
+    .control ul {
+      list-style: none;
+      display: flex;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin: 0;
+      padding: 0;
+      transform: translate(-50%);
+    }
+    .control ul li {
+      width: 10px;
+      height: 10px;
+      background: #333;
+      border: 2px solid #333;
+      border-radius: 50px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .control ul li.selected {
+      background: transparent;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="carousel">
+    <div class="slider">
+      <section>Content for panel 1</section>
+      <section>Content for panel 2</section>
+      <section>Content for panel 3</section>
+      <section>Content for panel 4</section>
+    </div>
+    <div class="control">
+      <span class="arrow left">
+        <i class="material-icons">
+          &lt;
+        </i>
+      </span>
+      <span class="arrow right">
+        <i class="material-icons">
+          &gt;
+        </i>
+      </span>
+      <ul>
+        <li class="selected"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</div>
+  <script>
+    const slider = document.querySelector('.slider');
+    const leftArrow = document.querySelector('.left');
+    const rightArrow = document.querySelector('.right');
+    const indicatorParents = document.querySelector('.control ul');
+    let sectionIndex = 0;
+
+    function setIndex() {
+      document.querySelector('.control .selected').classList.remove('selected');
+      slider.style.transform = `translate(${-25 * sectionIndex}%)`;
+    }
+
+    document.querySelectorAll('.control li').forEach(function(indicator, idx) {
+      indicator.addEventListener('click', function() {
+        sectionIndex = idx;
+        setIndex();
+        indicator.classList.add('selected');
+        console.log(indicator)
+      })
+    })
+    
+    leftArrow.addEventListener('click', function() {
+      sectionIndex = (sectionIndex > 0) ? sectionIndex - 1 : 3;
+      setIndex();
+      indicatorParents.children[sectionIndex].classList.add('selected');  
+      console.log(sectionIndex)
+    })
+    
+    rightArrow.addEventListener('click', function() {
+      sectionIndex = (sectionIndex < 3) ? sectionIndex + 1 : 0;
+      setIndex();
+      indicatorParents.children[sectionIndex].classList.add('selected');
+      console.log(sectionIndex)
+    })
+
+  </script>
+</body>
+</html>
